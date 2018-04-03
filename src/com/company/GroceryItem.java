@@ -1,16 +1,17 @@
 package com.company;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class GroceryItem {
     private String name;
     private int price;
-    private int amount;
+    private LocalDateTime date;
 
     public GroceryItem(String name, int price, int amount) {
         this.name = name;
         this.price = price;
-        this.amount = amount;
+        this.date = date;
     }
 
     public String getName() {
@@ -21,8 +22,8 @@ public class GroceryItem {
         return price;
     }
 
-    public int getAmount() {
-        return amount;
+    public LocalDateTime getDate() {
+        return date;
     }
 
     public void setName(String name) {
@@ -33,8 +34,8 @@ public class GroceryItem {
         this.price = price;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAmount(LocalDateTime date) {
+        this.date = date;
     }
 
     @Override
@@ -43,19 +44,19 @@ public class GroceryItem {
         if (o == null || getClass() != o.getClass()) return false;
         GroceryItem that = (GroceryItem) o;
         return price == that.price &&
-                amount == that.amount &&
+                date == that.date &&
                 Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, price, amount);
+        return Objects.hash(name, price, date);
     }
 
     @Override
     public String toString() {
-        return name + " " + price + " " + amount;
+        return date + "|" + name + "|" + price;
     }
 }
 
