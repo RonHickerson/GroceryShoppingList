@@ -43,12 +43,17 @@ public class Main {
         // list should have all items that were purchased during the last 2 shopping dates but remove all but 3 items
         // that cost more than $10 from that list.
 
-        ArrayList<GroceryItem> nextTime = futureList(2, 3, 10);
+        // TODO
+        // ArrayList<GroceryItem> nextTime = futureList(2, 3, 10);
 
     }
-    private static ArrayList<GroceryItem> futureList(int dates, int items, int price) {
 
-    }
+
+
+    // TODO
+    // private static ArrayList<GroceryItem> futureList(int dates, int items, int price) {
+    //    return nil;
+    // }
 
     // Match List based on dates
     public static ArrayList<GroceryItem> matchListDate(ArrayList<GroceryItem> list, LocalDateTime date){
