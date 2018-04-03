@@ -8,7 +8,7 @@ public class GroceryItem {
     private int price;
     private LocalDateTime date;
 
-    public GroceryItem(String name, int price, int amount) {
+    public GroceryItem(String name, int price, LocalDateTime date) {
         this.name = name;
         this.price = price;
         this.date = date;
