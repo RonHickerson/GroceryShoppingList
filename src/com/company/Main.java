@@ -11,6 +11,7 @@ public class Main {
         LocalDateTime today = LocalDateTime.now();
 
 
+
         // Create 3 Grocery Items
         GroceryItem eggs = new GroceryItem("Eggs", 3, today);
         GroceryItem milk = new GroceryItem("Milk", 4, today);
@@ -25,13 +26,17 @@ public class Main {
         groceryList.add(milk);
         groceryList.add(bread);
 
+        GroceryItem porkchops = new GroceryItem("Porkchop", 12, LocalDateTime.of(2018, 4, 2, 11,46,0));
+        groceryList.add(porkchops);
+        LocalDateTime lastVisit = lastVisit(groceryList, today);
+
         // Items from last visit
-        int itemsFromLastVisit = countGroceriesFromDate(groceryList, lastVisit(groceryList, today));
-        System.out.println("Items bought on " + today + ": " + itemsFromLastVisit);
+        int itemsFromLastVisit = countGroceriesFromDate(groceryList, lastVisit);
+        System.out.println("Items bought on " + lastVisit + ": " + itemsFromLastVisit);
 
         // Price of items from last visit
-        int pricesFromLastVisit = calculatePriceOfItemsFromDate(groceryList, lastVisit(groceryList, today));
-        System.out.println("Total amount spent on " + today + ": " + pricesFromLastVisit);
+        int pricesFromLastVisit = calculatePriceOfItemsFromDate(groceryList, lastVisit);
+        System.out.println("Total amount spent on " + lastVisit + ": " + pricesFromLastVisit);
 
         // Number of items purchased by names
         int numberOfItemsPurchased = countItemPurchased(groceryList, "Eggs");
@@ -47,19 +52,28 @@ public class Main {
         // that cost more than $10 from that list.
 
         // TODO
-         ArrayList<GroceryItem> nextTime = futureList(groceryList, today, 2, 3, 10);
+
+         ArrayList<String> nextTime = futureList(groceryList, today, 2, 3, 10);
+        System.out.println("Things to buy later: " + nextTime);
 
     }
 
 
 
     // TODO
-     private static ArrayList<GroceryItem> futureList(ArrayList<GroceryItem> list, LocalDateTime date, int days, int items, int price) {
-        ArrayList<GroceryItem> futurePurchases;
-        for (int i = 0; i <list.size() ; i++) {
-             if (list.get(i).getDate().minusDays(days).isBefore(date))
+     private static ArrayList<String> futureList(ArrayList<GroceryItem> list, LocalDateTime date, int days, int items, int price) {
+        int count = 0;
+        ArrayList<String> futurePurchases = new ArrayList<>();
 
+        for (int i = 0; i < list.size() ; i++) {
+            if (count > items)
+                break;
+             else if (list.get(i).getDate().minusDays(days).isBefore(date) && list.get(i).getPrice() > price) {
+                futurePurchases.add(list.get(i).getName());
+                count++;
+            }
          }
+         return futurePurchases;
      }
 
     // Match List based on dates
@@ -101,7 +115,7 @@ public class Main {
         return date;
     }
 
-    // How many items were during the last visit to the store
+    // How many items were bought during the last visit to the store
     public static int countGroceriesFromDate(ArrayList<GroceryItem> list, LocalDateTime date) {
        ArrayList<GroceryItem> count = matchListDate(list, date);
         return count.size();
