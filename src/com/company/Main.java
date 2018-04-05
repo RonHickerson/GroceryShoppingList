@@ -10,11 +10,14 @@ public class Main {
         System.out.println("Hello World");
         LocalDateTime today = LocalDateTime.now();
 
+
         // Create 3 Grocery Items
         GroceryItem eggs = new GroceryItem("Eggs", 3, today);
         GroceryItem milk = new GroceryItem("Milk", 4, today);
         GroceryItem bread = new GroceryItem("Bread", 2, today);
         System.out.println("\tGrocery List: \n" + eggs + "\n" + milk + "\n" + bread);
+
+
 
         // Store Items in ArrayList
         ArrayList<GroceryItem> groceryList = new ArrayList<>();
@@ -23,11 +26,11 @@ public class Main {
         groceryList.add(bread);
 
         // Items from last visit
-        int itemsFromLastVisit = countGroceriesFromDate(groceryList, today);
+        int itemsFromLastVisit = countGroceriesFromDate(groceryList, lastVisit(groceryList, today));
         System.out.println("Items bought on " + today + ": " + itemsFromLastVisit);
 
         // Price of items from last visit
-        int pricesFromLastVisit = calculatePriceOfItemsFromDate(groceryList, today);
+        int pricesFromLastVisit = calculatePriceOfItemsFromDate(groceryList, lastVisit(groceryList, today));
         System.out.println("Total amount spent on " + today + ": " + pricesFromLastVisit);
 
         // Number of items purchased by names
@@ -44,16 +47,20 @@ public class Main {
         // that cost more than $10 from that list.
 
         // TODO
-        // ArrayList<GroceryItem> nextTime = futureList(2, 3, 10);
+         ArrayList<GroceryItem> nextTime = futureList(groceryList, today, 2, 3, 10);
 
     }
 
 
 
     // TODO
-    // private static ArrayList<GroceryItem> futureList(int dates, int items, int price) {
-    //    return nil;
-    // }
+     private static ArrayList<GroceryItem> futureList(ArrayList<GroceryItem> list, LocalDateTime date, int days, int items, int price) {
+        ArrayList<GroceryItem> futurePurchases;
+        for (int i = 0; i <list.size() ; i++) {
+             if (list.get(i).getDate().minusDays(days).isBefore(date))
+
+         }
+     }
 
     // Match List based on dates
     public static ArrayList<GroceryItem> matchListDate(ArrayList<GroceryItem> list, LocalDateTime date){
@@ -83,6 +90,15 @@ public class Main {
                 matchList.add(list.get(i));
         }
         return matchList;
+    }
+
+    // LastVisit
+    public static LocalDateTime lastVisit(ArrayList<GroceryItem> list, LocalDateTime date){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getDate().isBefore(date))
+            return list.get(i).getDate();
+        }
+        return date;
     }
 
     // How many items were during the last visit to the store
