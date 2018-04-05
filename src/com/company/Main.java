@@ -51,7 +51,7 @@ public class Main {
         // list should have all items that were purchased during the last 2 shopping dates but remove all but 3 items
         // that cost more than $10 from that list.
 
-        // TODO
+        //
 
          ArrayList<String> nextTime = futureList(groceryList, today, 2, 3, 10);
         System.out.println("Things to buy later: " + nextTime);
@@ -60,7 +60,7 @@ public class Main {
 
 
 
-    // TODO
+
      private static ArrayList<String> futureList(ArrayList<GroceryItem> list, LocalDateTime date, int days, int items, int price) {
         int count = 0;
         ArrayList<String> futurePurchases = new ArrayList<>();
