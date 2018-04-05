@@ -108,11 +108,12 @@ public class Main {
 
     // LastVisit
     public static LocalDateTime lastVisit(ArrayList<GroceryItem> list, LocalDateTime date){
+        LocalDateTime minDate= list.get(0).getDate();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getDate().isBefore(date))
-            return list.get(i).getDate();
+                minDate = list.get(i).getDate();
         }
-        return date;
+       return minDate;
     }
 
     // How many items were bought during the last visit to the store
